@@ -29,7 +29,7 @@ std::vector<double> scalMalt(double arr[], int arrSize, double c){
     return ans;
 }
 
-std::vector<double> minus(double arr1[], double arr2[], int arrSize){
+std::vector<double> subtract(double arr1[], double arr2[], int arrSize){
     std::vector<double> ans(arrSize);
 
     for(int i = 0; i < arrSize; i++){
@@ -80,7 +80,7 @@ std::vector<double> SGD(std::vector<std::function<double(double*)>> funcArr, int
         }
 
         vec = scalMalt(vec.data(), arrSize, step);
-        ans = minus(ans.data(), vec.data(), arrSize);
+        ans = subtract(ans.data(), vec.data(), arrSize);
 
         i++;
     }

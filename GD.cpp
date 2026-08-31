@@ -27,7 +27,7 @@ std::vector<double> scalMalt(double arr[], int arrSize, double c){
     return ans;
 }
 
-std::vector<double> minus(double arr1[], double arr2[], int arrSize){
+std::vector<double> subtract(double arr1[], double arr2[], int arrSize){
     std::vector<double> ans(arrSize);
 
     for(int i = 0; i < arrSize; i++){
@@ -69,7 +69,7 @@ std::vector<double> GD(double (*func)(double*), double startP[], int arrSize, do
         }
 
         vec = scalMalt(vec.data(), arrSize, step);
-        ans = minus(ans.data(), vec.data(), arrSize);
+        ans = subtract(ans.data(), vec.data(), arrSize);
 
         i++;
     }
@@ -91,10 +91,6 @@ int main(){
     double vec0[] = {1.4, 6.78};
     double vec1[] = {3.53, 2.65};
     double scal = 1.33;
-
-    //std::cout << "[" << grad(f, vec0, 2)[0] << ", " << grad(f, vec0, 2)[1] << "]\n";
-    //std::cout << "[" << minus(vec0, vec1, 2)[0] << ", " << minus(vec0, vec1, 2)[1] << "]\n";
-    //std::cout << "[" << scalMalt(vec0, 2, scal)[0] << ", " << scalMalt(vec0, 2, scal)[1] << "]\n";
 
     std::vector<double> res = GD(f, vec1, 2, 0.01);
 

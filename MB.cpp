@@ -29,7 +29,7 @@ std::vector<double> scalMalt(double arr[], int arrSize, double c){
     return ans;
 }
 
-std::vector<double> minus(double arr1[], double arr2[], int arrSize){
+std::vector<double> subtract(double arr1[], double arr2[], int arrSize){
     std::vector<double> ans(arrSize);
 
     for(int i = 0; i < arrSize; i++){
@@ -39,7 +39,7 @@ std::vector<double> minus(double arr1[], double arr2[], int arrSize){
     return ans;
 }
 
-std::vector<double> plus(double arr1[], double arr2[], int arrSize){
+std::vector<double> add(double arr1[], double arr2[], int arrSize){
     std::vector<double> ans(arrSize);
 
     for(int i = 0; i < arrSize; i++){
@@ -83,7 +83,7 @@ std::vector<double> MB(double (*func)(double*, double*), std::vector<std::vector
 
         for(int j = 0; j < MBSize; j++){
             std::vector<double> vec = grad(func, batch[j].data(), ans.data(), arrSize);
-            avGrad = plus(avGrad.data(), vec.data(), arrSize);
+            avGrad = add(avGrad.data(), vec.data(), arrSize);
         }
         
         double coef = (1.0 / MBSize);
@@ -95,7 +95,7 @@ std::vector<double> MB(double (*func)(double*, double*), std::vector<std::vector
 
         avGrad = scalMalt(avGrad.data(), arrSize, step);
 
-        ans = minus(ans.data(), avGrad.data(), arrSize);
+        ans = subtract(ans.data(), avGrad.data(), arrSize);
 
         i++;
     }
@@ -113,8 +113,8 @@ int main(){
     double x[] = {4.5, 7};
     double nu = 0.01;
 
-    std::vector<double> extr = MB(L, coefs, x, 2, 3, nu);
-    std::cout << "[" << extr.data()[0] << ", " << extr.data()[1] << "]\n";
+    std::vector<double> res = MB(L, coefs, x, 2, 3, nu);
+    std::cout << "[" << res.data()[0] << ", " << res.data()[1] << "]\n";
 
     return 0;
 }
