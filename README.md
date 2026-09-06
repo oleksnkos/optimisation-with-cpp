@@ -10,6 +10,10 @@ This project was created primarily as a learning project to practice numerical o
 - Stochastic Gradient Descent (SGD)
 - Mini-Batch Gradient Descent (MBGD)
 - Numerical gradient approximation using central differences
+- Numerical integration using Simpson's rule
+- Inner products and induced norms for functions
+- Gram-Schmidt orthonormalisation
+- Orthogonal projection and function approximation using orthonormal bases
 
 ## Tech Stack
 
@@ -39,6 +43,8 @@ optimisation-with-cpp/
 
 `MB.cpp` implements mini-batch gradient descent. The dataset is shuffled and divided into smaller batches, with the average gradient of each batch used to update the model parameters.
 
+`orthProjMin.cpp` implements numerical operations on functions and orthogonal projection in a function space. Simpson's rule is used for numerical integration, which is then used to define an integral inner product and its induced norm. The Gram-Schmidt process converts a given basis of functions into an orthonormal basis. This basis can then be used to approximate another function by computing its orthogonal projection onto the span of the basis functions.
+
 ## What I Practiced
 
 The main purpose of this project was to practice:
@@ -55,3 +61,9 @@ The main purpose of this project was to practice:
 - C++ vectors and standard library algorithms
 - Random sampling and dataset shuffling
 - Translating mathematical algorithms into C++ implementations
+- Numerical integration using Simpson's rule
+- Inner products and induced norms in function spaces
+- Gram-Schmidt orthonormalisation
+- Orthogonal projection
+- Function approximation using orthonormal bases
+- Representing and manipulating mathematical functions with std::function
