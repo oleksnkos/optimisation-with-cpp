@@ -94,6 +94,23 @@ std::vector<std::function<double(double)>> orthNorm(std::vector<std::function<do
     return orthNormBasis;
 }
 
+//Approximating a function with a given orthonormal basis
+std::function<double(double)> approxWithBasis(std::function<double(double)> f, std::vector<std::function<double(double)>> orthNormBasis){
+    std::function<double(double)> approx =
+        [f, orthNormBasis](double x){
+
+            double result = 0;
+
+            for(int i = 0; i <orthNormBasis.size(); i++){
+                result += integrInnerProd(f, orthNormBasis[i]) * orthNormBasis[i](x);
+            }
+
+            return result;
+        };
+
+    return approx;
+}
+
 
 double f3(double x){
     return pow(x, 3);
@@ -111,15 +128,17 @@ double f0(double x){
     return 1;
 }
 
-
+double g(double x){
+    return sin(x);
+}
 
 int main(){
 
-    double in = integrInnerProd(f3, f2, 2, 5);
-    std::cout << in << ", " << simpsonIntegr(product(f3, f2), 2, 5, 100000) <<'\n';
+    //double in = integrInnerProd(f3, f2, 2, 5);
+    //std::cout << in << ", " << simpsonIntegr(product(f3, f2), 2, 5, 100000) <<'\n';
 
-    double indn = inducedNorm(f3, 2, 5);
-    std::cout << indn << ", " << std::sqrt(integrInnerProd(f3, f3, 2, 5)) <<'\n';
+    //double indn = inducedNorm(f3, 2, 5);
+    //std::cout << indn << ", " << std::sqrt(integrInnerProd(f3, f3, 2, 5)) <<'\n';
 
     std::vector<std::function<double(double)>> V;
     V.push_back(f3);
@@ -128,6 +147,9 @@ int main(){
     V.push_back(f0);
     std::vector<std::function<double(double)>> orthNormV = orthNorm(V);
     std::cout << orthNormV[0](3) << ", " << orthNormV[1](4) << "\n";
+
+    std::function<double(double)> polySin = approxWithBasis(g, orthNormV);
+    std::cout << polySin(0) << ", " << polySin(3.14159265 / 2) << "\n";
 
     return 0;
 }
